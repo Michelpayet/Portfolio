@@ -40,7 +40,8 @@ def index():
     """Show portfolio of stocks"""
     user_id = session["user_id"]
 
-    transactions_db = db.execute("SELECT symbol, SUM(shares) as shares, price FROM portfolio WHERE users_id = ? GROUP BY symbol", user_id)
+    transactions_db = db.execute(
+        "SELECT symbol, SUM(shares) as shares, price FROM portfolio WHERE users_id = ? GROUP BY symbol", user_id)
     cash_db = db.execute("SELECT cash FROM users WHERE id = ?", user_id)
     cash = cash_db[0]["cash"]
 
@@ -54,7 +55,6 @@ def index():
     formatted_total = "{:.2f}".format(total)
 
     return render_template("index.html", database=transactions_db, cash=cash, total=formatted_total)
-
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -244,7 +244,7 @@ def sell():
         user_cash = balance[0]["cash"]
 
         user_shares = db.execute("SELECT shares FROM portfolio WHERE users_id = ? AND symbol = ? GROUP BY symbol",
-                                  user_id, symbol)
+                                 user_id, symbol)
         if not user_shares:
             return apology("Not avaiable")
 
@@ -265,3 +265,4 @@ def sell():
         flash("Transaction Successful!")
 
     return redirect("/")
+
