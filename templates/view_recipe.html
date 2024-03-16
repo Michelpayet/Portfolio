@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ recipe.title }}</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel = "stylesheet" href = "/static/css/style.css">
+
+</head>
+<body>
+    <header>
+        {% if session["user_id"] %}
+        <div class = "navbar">
+            <div class="logo"><a href="/what_to_cook"><img src="/static/logo.png" alt="What To Cook" class="logo-img"></a></div>
+            <ul class="links">
+            <li><a href="/profile">{{ user_name }}</a></li>
+            <li><a href="/about">About</a></li>
+            </ul>
+            <a href ="logout" class="action_btn">Logout</a>
+            <div class="toggle_btn">
+            <i class="fas fa-bars"></i>
+            </div>
+        </div>
+        <div class="dropdown_menu">
+        <li><a href="/profile">{{ user_name }}</a></li>
+        <li><a href="/about">About</a></li>
+        <a href ="logout" class="action_btn">Logout</a>
+        </div>
+        {% else %}
+        <div class = "navbar">
+            <div class="logo"><a href="/what_to_cook"><img src="/static/logo.png" alt="What To Cook" class="logo-img"></a></div>
+            <ul class="links">
+            <li><a href="about">About</a></li>
+            </ul>
+        <a href ="logout" class="action_btn">Logout</a>
+            <div class="toggle_btn">
+            <i class="fas fa-bars"></i>
+            </div>
+        </div>
+        <div class="dropdown_menu">
+        <li><a href="about">About</a></li>
+        <li><a href ="logout" class="action_btn">Logout</a></li>
+        </div>
+    </header>
+    {% endif %}
+
+    <div class="recipe-details">
+        <h1>{{ recipe.title }}</h1>
+
+        <!-- Display the recipe image if available -->
+        {% if recipe.image %}
+        <img src="{{ recipe.image }}" alt="{{ recipe.title }}" class="view-recipe-img">
+        {% endif %}
+
+        <!-- Ingredients section -->
+        <h2 class="section-title">Ingredients</h2>
+        <!-- Create an unordered list for displaying the ingredients -->
+        <ul class="ingredient-list">
+            <!-- Loop through each ingredient in the recipe's extendedIngredients -->
+            {% for ingredient in recipe.extendedIngredients %}
+            <li>{{ ingredient.original }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Instructions Section -->
+        <h2 class="section-title">Instructions</h2>
+        <ol class="instruction-list">
+            {% for step in recipe.analyzedInstructions[0].steps %}
+            <li>{{ step.step }}</li>
+            {% endfor %}
+        </ol>
+        <div class="btn-container">
+            <div class="back-btn">
+                <a href="/?search_query={{ search_query }}">
+                    <i class='bx bx-arrow-back' style="font-size: 34px;"></i>
+                </a>
+            </div>
+            <div class="save-btn">
+                {% if from_profile %}
+                <form action="/delete_saved_recipe/{{ recipe.id }}" method="POST">
+                    <button type="submit" class="delete_recipe">
+                        <i class='bx bx-trash' style="font-size: 34px;"></i>
+                    </button>
+                </form>
+                {% else %}
+                    <form action="/save_recipe/{{ recipe.id }}" method="POST">
+                        <button type="submit" class="save_recipe">
+                            <i class='bx bx-download' style="font-size: 34px;"></i>
+                        </button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash-messages">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+
+    </div>
+    <script src = "/static/js/script.js"></script>
+</body>
+</html>

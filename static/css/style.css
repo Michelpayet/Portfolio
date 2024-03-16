@@ -1,0 +1,549 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+
+:root{
+    --orange-peel: #ffa629;
+    --orange-peel-dark: #ff990a;
+}
+body{
+    background-image: url('/static/background.svg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    text-align: center;
+    margin: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+.logo-img {
+    width: 150px;
+    height: auto; 
+    transition: transform 0.3s ease; /* Add transition for smooth effect */
+}
+.logo-img:hover {
+    transform: scale(1.1); /* Increase size on hover */
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+}
+
+a:hover {
+    color:rgb(255, 153, 10)
+}
+/* Header */
+header {
+    position: relative;
+    padding: 0 2rem;
+}
+
+.navbar{
+    width: 100%;
+    height: 60px;
+    margin: 20 auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(216, 179, 128, 0.034);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+}
+
+.navbar .logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar .links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center; 
+    flex-grow: 1;
+    width: 100%;
+}
+
+.navbar .toggle_btn {
+    position: relative;
+    right: 30px; /* Adjust the right position */
+    align-self: center;
+    color: black;
+    font-size: 1.5rem;
+    display: none;
+}
+
+.navbar .action_btn {
+    background-color: #ff990a;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 30px;
+}
+
+.action_btn:hover {
+    transform: scale(1.05);
+    color: #fff;
+}
+
+.action_btn:active {
+    transform: scale(0.95)
+}
+
+/* Dropdown menu */
+.dropdown_menu {
+    display: none;
+    position: absolute;
+    right: 2rem;
+    top: 60px;
+    height: 0;
+    width: 300px;
+    background: rgba(225, 225, 225, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: height cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dropdown_menu.open {
+    height: 240px;
+}
+
+.dropdown_menu li {
+    padding: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown_menu .action_btn {
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    flex-grow: 1;
+}
+
+/* Responsive design */
+@media(max-width: 992px){
+    .navbar .links,
+    .navbar .action_btn {
+        display:none;
+    }
+
+    .navbar .toggle_btn {
+        display: block;
+    }
+}
+
+.dropdown_menu {
+    display: block;
+}
+
+@media(max-width: 576px) {
+    .dropdown_menu {
+        left: 2rem;
+        width: unset;
+    }
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+li {
+    display: inline-block;
+    text-align: center;
+    margin: 10px;
+    width: calc(33.33% - 20px); /* Adjust width to fit 3 items per row */
+    max-width: calc(33.33% - 20px); /* Ensure each item takes at most one-third of the space */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+/* Update for 3x grid */
+@media (max-width: 800px) {
+    li {
+        width: calc(50% - 20px);
+        max-width: calc(50% - 20px) /* Two items per row for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    li {
+        width: calc(100% - 20px);
+        max-width: calc(100% - 20px);
+         /* One item per row for even smaller screens */
+    }
+}
+.recipe-container {
+    max-width: 300px; /* Reduce the maximum width of the container */
+    height: 300px; /* Set a fixed height for the container */
+    margin: 0 auto; /* Center the container horizontally */
+    text-align: center;
+    background-color: rgba(240, 240, 240, 0.8);
+    border: 2px solid #ccc;
+    border-radius: 10px; /* Make the edges round */
+    overflow: hidden;
+    padding: 20px; /* Add some padding for better spacing */
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+}
+.recipe-container h3 {
+    font-size: 16px;
+    line-height: 1.2;
+    max-height: 3.6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    margin: 0;
+}
+
+.recipe-container img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px; /* Make the edges round */
+    max-width: 100%;
+    width: 100%;
+}
+
+.recipe-container a {
+    display: block;
+    margin-top: 10px;
+    color: #ff990a;
+}
+.view-button {
+    bottom: 5px;
+    padding: 10px 20px;
+    color: white;
+    background-color: #ffa62b;
+    ;
+    border: none;
+    border-radius: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.view-button:hover {
+    background-color: #ff990a;
+}
+
+.recipe-details {
+    max-width: 600px;
+    margin: 0 auto;
+    border: 2px solid #ccc;
+    padding: 20px;
+}
+.section-title {
+    text-align: left;
+    margin-bottom: 10px;
+}
+.ingredient-list, .instrction-list {
+    text-align: left;
+}
+
+/* Search Box */
+.search-container {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  
+  .search-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ff990a;
+    border-radius: 20px;
+    padding: 5px;
+    max-width: 900px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"] {
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 20px;
+    flex: 1;
+  }
+  
+  .search-btn {
+    background-color: #ffa62b;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: -40px;
+  }
+  
+  .search-btn i {
+    margin-right: 5px;
+  }
+  
+  .search-btn:hover {
+    background-color: #ff990a;
+  }
+  
+  .search-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
+  }
+
+
+
+
+/* Login interface */
+.login_wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    background: transparent;
+    border: 2px solid rgba(225, 225, 225, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(225, 225, 225, 0.2);
+    color: var(--orange-peel);
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.login_wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+.login_wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 2px solid rgba(225, 225, 225, 0.2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #ff990a;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.input-box input::placeholder {
+    color: #ff990a;  
+}
+
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+.input-box i.lock-icon {
+    display: block;
+}
+
+.input-box input:focus + i.lock-icon {
+    display: none;
+}
+
+.login_wrapper .btn-login {
+    width: 100%;
+    height: 45px;
+    background: #ff990a; 
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    color: black;
+    font-weight: 600;
+}
+
+.login_wrapper .register-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+
+.register-link p a {
+    color: aqua;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link p a:hover {
+    text-decoration: underline;
+}
+
+/* Join interface */
+.join_wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    background: transparent;
+    border: 2px solid rgba(225, 225, 225, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(225, 225, 225, 0.2);
+    color: var(--orange-peel);
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.join_wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+.join_wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 2px solid rgba(225, 225, 225, 0.2);
+    outline: none;
+    border-radius: 40px;
+    font-size: 16px;
+    color: #ff990a;
+    padding: 20px;
+    box-sizing: border-box; 
+}
+
+.input-box input::placeholder {
+    color: #ff990a;  
+}
+
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+.join_wrapper .btn-join {
+    width: 100%;
+    height: 45px;
+    background: #ff990a; 
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    color: black;
+    font-weight: 600;
+}
+
+.about {
+    max-width: 800px;
+    margin: 100px auto 0;
+    text-align: center;
+}
+
+.about h1 {
+    font-size: 32px;
+}
+
+.about h3 {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Recipe Details */
+.recipe-details h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+}
+.recipe-details h2::after {
+    content: "";
+    position: absolute;
+    bottom: -5px; /* Adjust the position of the line */
+    left: 0;
+    width: 100%;
+    height: 1px; /* Adjust this height according to your preference */
+    background-color: black; /* Adjust color as needed */
+}
+.recipe-details ul, ol {
+    text-align: left;
+    list-style-position: inside;
+    padding-left: 20px;
+}
+
+.view-recipe-img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 15px;
+}
+
+.recipe-details {
+    max-width: 700px;
+    margin: 40px auto 20px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.ingredient-list li,
+.instruction-list li {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.back-btn, .save-btn {
+    flex: 1;
+    color: #ffa629;
+}
+.back-btn:hover i,
+.save-btn:hover i {
+    color: #ff990a; /* Change the color on hover */
+    transform: scale(1.1); /* Scale the icon on hover */
+}
+
+.save-btn button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
